@@ -1,0 +1,53 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load otree %}
+
+{% block title %}
+    Task 2
+{% endblock %}
+
+{% block styles %}
+    {% include 'snippets/Button_style.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+        <script>
+        let customTimerEle = document.getElementById('mins-left');
+        let customTimer2 = document.getElementById('secs-left');
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            $('.otree-timer__time-left').on('update.countdown', function (event) {
+                customTimerEle.innerText = event.offset.totalMinutes;
+                customTimer2.innerText = event.offset.totalSeconds - event.offset.totalMinutes*60;
+
+            });
+        });
+
+
+
+    </script>
+{% endblock %}
+
+{% block content %}
+ <div class="alert alert-secondary" role="alert">
+  This page will automatically submit in <b>
+   <span id="mins-left"></span> minutes and <span id="secs-left"></span> seconds</b>.
+
+ <br><br>
+
+     {{if player.danat == "A"}}
+  <h5>You clicked Option A. Please wait until the page submits.</h5>
+     {{elif player.danat == "B"}}}
+       <h5>You clicked Option B. Please wait until the page submits.</h5>
+     {{endif}}
+ <br><br>
+
+
+
+</div>
+
+</div>
+
+
+{% endblock %}

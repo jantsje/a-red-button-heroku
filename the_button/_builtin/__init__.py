@@ -1,5 +1,5 @@
 # Don't change anything in this file.
-from .. import models
+from the_button import models
 import otree.api
 
 

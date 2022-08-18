@@ -1,7 +1,6 @@
-from otree.api import Currency as c, currency_range, SubmissionMustFail, Submission, expect
+from otree.api import SubmissionMustFail, expect
 from . import pages
-from ._builtin import Bot
-from .models import Constants
+from project.the_button_._builtin import Bot
 
 
 class PlayerBot(Bot):

@@ -1,0 +1,93 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block scripts%}
+<script>
+
+        let completionlink = js_vars.completionlink;
+        function completed() {
+            console.log("clicking the button")
+            window.location.href = completionlink;
+        }
+
+
+</script>
+{% endblock %}
+
+{% block title %} Final Payoff {% endblock %}
+
+{% block content %}
+
+        You have reached the end of the experiment, thank you for participating! Here is a summary of the final payoffs:
+    <br><br>
+
+    {% if treatment == "ButtonA" and player.selected == 0 %}
+        <div class="alert alert-info" role="alert">
+        <b>Task 2 </b>: From the randomly selected slider, you get {{payoff_svo}}&pound and the Red Cross gets {{ payoff_svo_other }}&pound.<br>
+        <b>Task 3 </b>: You have not been selected for payment.<br>
+        <b>Bonus</b>: {%if bonus == 0%}  You did not input the highest number. Pay more attention next time! No bonus for you.{%elif bonus != 0%} You inputed the highest number. You get a bonus of {{bonus}}  {% endif %}
+        </div><br>
+
+    {% elif treatment == "ButtonA" and player.selected == 1 %}
+        <div class="alert alert-info" role="alert">
+        <b>Task 2 </b>: From the randomly selected slider, you get {{payoff_svo}}&pound and the Red Cross gets {{ payoff_svo_other }}&pound.<br>
+        <b>Task 3 </b>: You have been selected for payment. <br>
+        <b>Bonus</b>:{%if bonus == 0%}  You did not input the highest number. Pay more attention next time! No bonus for you.
+       {%elif bonus != 0%} You inputed the highest number. You get a bonus of {{bonus}}&pound .  {% endif %}
+             </div><br>
+    {% elif treatment == "ButtonB" and player.selected == 0%}
+        <div class="alert alert-info" role="alert">
+        <b>Task 2 </b>: From the randomly selected slider, you get {{payoff_svo }}&pound and the Red Cross gets {{ payoff_svo_other }}&pound.<br>
+        <b>Task 3 </b>: You have not been selected for payment.<br>
+        <b>Bonus</b>:{%if bonus == 0%}  You did not input the highest number. Pay more attention next time! No bonus for you.
+       {%elif bonus != 0%} You inputed the highest number. You get a bonus of {{bonus}}&pound .  {% endif %}
+       </div><br>
+    {% elif treatment == "ButtonB" and player.selected == 1%}
+        <div class="alert alert-info" role="alert">
+        <b>Task 2 </b>:  From the randomnly selected slider, you get {{payoff_svo }}&pound and the Red Cross gets {{ payoff_svo_other }}&pound.<br>
+        <b>Task 3 </b>: You have been selected for payment. <br>
+        <b>Bonus</b>:{%if bonus == 0%}  You did not input the highest number. Pay more attention next time! No bonus for you.
+        {%elif bonus != 0%} You inputed the highest number. You get a bonus of {{bonus}}&pound .  {% endif %}
+         </div><br>
+    {% elif treatment == "NoButton" and player.selected == 0%}
+        <div class="alert alert-info" role="alert">
+        <b>Task 2 </b>:  From the randomly selected slider, you get {{payoff_svo }}&pound and the Red Cross gets {{ payoff_svo_other }}&pound .<br>
+        <b>Task 3 </b>: You have not been selected for payment.<br>
+        <b>Bonus</b>:{%if bonus == 0%}  You did not input the highest number. Pay more attention next time! No bonus for you.
+       {%elif bonus != 0%} You inputed the highest number. You get a bonus of {{bonus}}&pound .{% endif %}</div><br>
+
+    {% elif treatment == "NoButton" and player.selected == 1%}
+         <div class="alert alert-info" role="alert">
+        <b>Task 2 </b>: From the randomly selected slider, you get {{payoff_svo}}&pound and the Red Cross gets {{ payoff_svo_other }}&pound .<br>
+        <b>Task 3 </b>: You have been selected for payment.<br>
+        <b>Bonus</b> :{% if bonus == 0 %}  You did not input the highest number. Pay more attention next time! No bonus for you.
+       {% elif bonus != 0 %} You inputed the highest number. You get a bonus of {{bonus}}&pound .
+    {% endif %}
+             </div><br>
+        {% endif %}
+
+
+ <div class="alert alert-light" role="alert">
+     Your total payoff is then: {{payoff4}}&pound .
+ </div>
+
+<button type="button" class="btn btn-primary btn-right btn-lg" onclick="completed()" > Back to Prolific </button>
+
+{% endblock %}
+{% block styles %}
+    <style>
+
+        .col-centered {
+            display:inline-block;
+            float:none;
+            /* reset the text-align */
+        {#text-align:left;#}
+            /* inline-block space fix */
+            margin-right:-4px;
+            text-align: center;
+        }
+
+    </style>
+
+{% endblock %}
+

@@ -1,0 +1,109 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load otree %}
+
+{% block title %}
+   End of Task 3
+{% endblock %}
+
+{% block styles %}
+
+        {% include 'snippets/Button_style.html' %}
+
+    <style>
+    .btn--action:hover, .btn--action:focus {
+        background-color: indianred;
+        transform: translateY(2px);
+        }
+    .btn--action{
+        cursor: pointer;
+        background-image: url('https://www.ifrc.org/sites/default/files/styles/article_press_release_featured_image/public/IMG_0251.jpg?itok=OvT1jknw');
+        background-position: center;
+    }
+
+
+    .btn--action2{
+        cursor: pointer;
+        background-image: url('https://media.istockphoto.com/vectors/french-franc-coin-icon-flat-vector-illustration-with-sign-of-franc-vector-id1064319546?k=20&m=1064319546&s=612x612&w=0&h=k_YIIwmr_K_PtXP_T0iQNBe90cip51irg_Wkj7BS7-M= ');
+        background-position: center;
+    }
+    .otree-timer.alert {
+        display:none;
+}
+    </style>
+
+{% endblock %}
+
+{% block scripts %}
+        <script>
+        let customTimerEle = document.getElementById('mins-left');
+        let customTimer2 = document.getElementById('secs-left');
+        let customTimer = document.getElementById('store_time');
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            $('.otree-timer__time-left').on('update.countdown', function (event) {
+                customTimerEle.innerText = event.offset.totalMinutes;
+                customTimer2.innerText = event.offset.totalSeconds - event.offset.totalMinutes*60;
+                customTimer.innerText = event.offset.totalSeconds;
+
+            });
+        });
+
+        function storeTime() {
+            console.log("hallo", customTimer.innerText);
+            document.getElementById('store_time').value = customTimer.innerText;
+        }
+
+        setTimeout(function() {$(".content").fadeOut(1500);}, 3000)
+        setTimeout(function() {$(".content1").fadeIn(1500);}, 30000); //30 seconds
+        setTimeout(function() {$(".content1").fadeOut(1500);},34000); //lasts for 4 seconds
+        setTimeout(function() {$(".content2").fadeIn(1500);},80000);  //AT  80000 = 1;20. remaining 1 min 80 seconds :
+        setTimeout(function() {$(".content2").fadeOut(1500);},84000); //lasts for 4 seconds113000
+        setTimeout(function() {$(".content3").fadeIn(1500);},120000);   //at 2 mins
+        setTimeout(function() {$(".content3").fadeOut(1500);},124000);  //lasts for 4 seconds
+        setTimeout(function() {$(".content4").fadeIn(1500);},150000);  //AT 2 min 30 seconds
+        setTimeout(function() {$(".content4").fadeOut(1500);},154000); //lasts for 4 seconds
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    <input type="hidden" name="store_time" id="store_time" />
+
+
+ <div class="alert alert-secondary" role="alert">
+
+  This page will automatically submit in <b>
+   <span id="mins-left"></span> minutes and <span id="secs-left"></span> seconds</b>. <br>
+<b>Clicking the button cannot be reversed. Clicking the button will not make you advance to the next page.</b><br>
+  <b>   If you do not click, your payoff will be {{Constants.optionB0}}&pound  and the Red Cross will get {{ Constants.optionB1}}&pound.<b> <br><br>
+
+
+ <br><br>
+<div class=“parent”>
+      <div class="col-12">
+      <button name="button" value="True" class="btn btn--action" onclick="storeTime();this.disabled=true"><br>
+        <br><p>  <br><br><br> </p>
+         <h4>    <br><br><br></h4>
+            <br> </button>  </div>
+
+
+            <div class=“child”><div  style="position:absolute;top: 290px; left: 170px; right: 0px; bottom: 30px"> <h4>If you click: </h4> </div>  </div>
+            <div class=“child”><div  style="position:absolute;top: 290px; left: 640px; right: 40px; bottom: 30px">  <h4>You: {{Constants.optionA0}}&pound , Red Cross: {{Constants.optionA1}}&pound </h4></div>  </div>
+            <div class=“child”><div class="content1" style="display:none; position:absolute;top: 400px; left: 100px; right: 0px; bottom: 0px;font-size:50px;color:red;font-family: Fantasy;">1</div>  </div>
+            <div class=“child”><div class="content2" style="display:none;position:absolute;top: 300px; left: 800px; right: 220px; bottom: 0px;color:red; font-size:50px;font-family: Fantasy;"> 6 </div></div>
+            <div class=“child”><div class="content3" style="display:none;position:absolute;top: 100px; left: 700px; right: 40px; bottom: 30px;color:red;font-size:50px; font-family: Fantasy ; "> 10 </div></div>
+            <div class=“child”><div class="content4" style="display:none;position:absolute;top:0px; left: 45px; right: 250px; bottom: 60px;color:red;font-size:50px; font-family: Fantasy ; "> 100 </div></div>
+
+
+</div>
+
+
+ <br><br><br>
+
+
+</div>
+
+
+
+{% endblock %}
