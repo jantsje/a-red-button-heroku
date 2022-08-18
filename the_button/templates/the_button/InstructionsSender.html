@@ -1,0 +1,62 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Instructions Task 2 (II)
+{% endblock %}
+
+{% block styles %}
+    <style>
+    .btn { white-space:normal !important; word-wrap:break-word; }
+    .btn--action{
+  display: block;
+  width: 90%;
+  padding: 2rem;
+  border-radius: 350px;
+  background-color: red;
+  color: #000;
+  box-shadow: 0 20px darkred;
+}
+    </style>
+    {% endblock %}
+
+{% block scripts %}
+
+    <script>
+$('.collapse').collapse()
+    let activeTab = 0;
+
+    function showCurrentTabOnly() {
+        let tabIndex = 0;
+        for (let tab of document.getElementsByClassName('tab')) {
+            tab.style.display = tabIndex === activeTab ? 'block' : 'none';
+            tabIndex++;
+        }
+    }
+
+    showCurrentTabOnly();
+    for (let btn of document.getElementsByClassName('btn-tab')) {
+        btn.onclick = function () {
+            activeTab += parseInt(btn.dataset.offset);
+            showCurrentTabOnly();
+        }
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="card">
+  <div class="card-body">
+
+{% include 'snippets/Instr2Sender.html' %}
+
+              <p> After reading the instructions, press "Next" to proceed.</p>
+</div></div>
+<br>
+
+  {% next_button %}
+
+
+{% endblock %}

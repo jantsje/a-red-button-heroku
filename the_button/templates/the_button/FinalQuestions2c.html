@@ -1,0 +1,86 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Final Questionnaire (3/6)
+{% endblock %}
+
+
+{% block styles %}
+    {% include 'snippets/Button_style.html' %}
+<style>
+
+.table td {
+  vertical-align: middle;
+}
+
+</style>
+    {% endblock %}
+
+{% block content %}
+
+
+<div class="card"><div class="card-body">
+
+    <p> Before finishing Task 2, we would like to know your belief about how participants choosing as
+        Player A behaved in their task. Therefore, we ask you to think of 100 participants choosing
+        as Player A and give your best guess about how many these 100 participants chose to click
+        the button when they received information about a negative consequence of
+        <b>{{ Constants.payoffs_charity.2.0 }}&pound;{{ Constants.payoffs_charity.2.1 }}</b>. </p>
+    <p>
+        {% if player.role == "Receiver" %}
+            Note that <b>pressing the button had different consequences for different players</b>.
+        {% endif %}
+
+    </p>
+
+<div class="row">
+<div class="col-md-7 col-12">
+
+<table style="width:900px;" class="table table-bordered table-sm">
+  <thead class="thead-light">
+  <tr>
+    <th style="min-width: 200px">Your estimate</th>
+      </tr>
+  </thead>
+
+    <td><div class="form-group col-sm-5" style="margin-bottom:0">
+    <div class="form-group has-error">
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <div class="input-group">
+        <input name="belief3" required type="number" min="0"
+               max="100" id="belief3" autocomplete="off"
+                class="form-control" style="padding:0" >
+          <div class="input-group-append"><div class="input-group-text">out of 100 players</div> &nbsp; click the button
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        </div></td></tr>
+
+      </table>
+
+    </div>
+<div class="col">
+<div class="alert-secondary">
+<br><br>
+      <button name="button_test" value="True" class="btn btn--action" disabled><br>
+        <br><p> If you click: <br><br> </p>
+          <h4>You: +&pound;{{ Constants.optionB }}</h4>
+          <h4> Red Cross: {{ Constants.payoffs_charity.2.0 }}&pound;{{ Constants.payoffs_charity.2.1 }} </h4>
+          <br><br><br><br>
+
+        </button><br><br></div>
+</div>
+</div>
+</div>
+</div></div>
+
+    <br>
+
+{% next_button %}
+{% endblock %}

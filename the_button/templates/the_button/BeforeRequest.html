@@ -1,0 +1,35 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Request
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="card">
+  <div class="card-body">
+  <p>
+  You have finished the instructions of Task 2.
+
+</p>
+
+
+      <p>Before you and Player B make your choices, you have the opportunity to inform Player Be about your preference
+      to have or not to have information. </p>
+  {% if treatment == "Request + Punishment" %}
+      <p>
+      Moreover, at the very end of the task, when all choices have been made, you have a final decision to make.
+          You will choose whether to <b>confirm or to reduce</b>
+          Player B’s bonus payment by {{ Constants.punishment }} pence for Task 2.
+      </p>
+
+  {% endif %}
+
+  </div>
+</div>
+<br>
+    {% next_button %}
+{% endblock %}

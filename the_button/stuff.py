@@ -4,14 +4,16 @@ oTree page extensions.
 Sept. 2018, Markus Konrad <markus.konrad@wzb.eu>
 """
 
-#from project import settings
+
+import settings
 
 from django import forms
-#from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _
 
 from otree.api import Page, WaitPage
-#APPS_DEBUG = getattr(settings, 'APPS_DEBUG', False)
-#DEBUG_FOR_TPL = str(APPS_DEBUG).lower()
+
+APPS_DEBUG = getattr(settings, 'APPS_DEBUG', False)
+DEBUG_FOR_TPL = str(APPS_DEBUG).lower()
 
 
 class AllGroupsWaitPage(WaitPage):
@@ -91,7 +93,7 @@ class UnderstandingQuestionsPage(ExtendedPage):
     default_hint = 'This answer is not correct. Please read the instructions carefully and try again.'
     default_hint_empty = 'Please fill out this answer.'
     questions = []  # define the understanding questions here. add dicts with the following keys: "question", "options", "correct"
-#    set_correct_answers = APPS_DEBUG   # useful for skipping pages during development
+    set_correct_answers = APPS_DEBUG   # useful for skipping pages during development
     # template_name = 'dana/UnderstandingQuestionsPage.html'   # reset to None to use your own template that extends this one
     form_field_n_wrong_attempts = None   # optionally record number of wrong attempts in this field (set form_model then, too!)
     form_fields = []   # no need to change this
