@@ -1,0 +1,41 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    {% if treatment == "Symbolic Punishment" %} Feedback to Player B
+    {% else %} Player A final choice
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+      Before ending the task, we ask you to make one final choice.
+      Player B decided to <b>share information</b> with you about the consequences for the Red Cross.
+      {% if treatment == "Symbolic Punishment" %}
+      <br><br> Now you have the opportunity to send them feedback about their decision to share information.
+      You can send feedback by pressing on one of the following buttons:
+
+      <p>
+    <button name="punishment" value="1" class="btn btn-light" style="font-size:50px">&#128544; </button>
+    <button name="punishment" value="0" class="btn btn-light" style="font-size:20px">no feedback </button>
+
+</p>
+      {% elif treatment == "Request + Punishment" %}
+<p>    <br> Now you have the opportunity confirm or reduce the {{ player.bonus_minus_cost }} pence bonus payment for Player B
+    in response to their decision to share information.
+    Make your choice below.
+</p>
+
+<p>
+    <button name="punishment" value="1" class="btn btn-secondary">Reduce bonus payment by {{ Constants.punishment }} pence</button>
+    <button name="punishment" value="0" class="btn btn-secondary">Confirm bonus payment</button>
+
+</p>
+
+
+  {% endif %}
+  </div>
+</div>
+
+{% endblock %}

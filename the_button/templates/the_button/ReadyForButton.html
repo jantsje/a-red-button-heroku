@@ -1,0 +1,69 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Ready for Task 2
+{% endblock %}
+
+{% block scripts %}
+    {% if informed %}
+<script>
+    $(document).ready(function(){
+        $("#exampleModal").modal('show');
+    });
+</script>
+    {% else %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="card"><div class="card-body">
+{% if informed %}
+    In their task, Player B was informed that the button on your screen gives you a bonus of &pound;{{Constants.optionB}}
+          but produces also negative consequences for the Red Cross.
+          </p><p>
+          Pressing the button, you will <b>reduce</b> the total amount donated to the Red Cross
+          at the end of this study by
+             <b> &pound;{% if message == "Red Cross: -£0.5" %}0.5{% elif message == "Red Cross: -£2.5" %}2.5{% else %}1{% endif %}</b>.
+          Player B had the opportunity to share this information with you and decided to do so.
+      </p>
+{% endif %}
+
+<p>Please press "Next" to start with Task 2.</p>
+ </div></div><br>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Attention!!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <p>
+
+          Before making your choice there is an important piece of <b>information that Player B wants to share with you.</b>
+          In their task, Player B was informed that the button on your screen gives you a bonus of &pound;{{Constants.optionB}}
+          but produces also <b><span style="color:red">negative consequences<span/></b> for the Red Cross.
+          </p><p>
+          Pressing the button, you will <b>reduce</b> the total amount donated to the Red Cross
+          at the end of this study by
+             <b> &pound;{% if message == "Red Cross: -£0.5" %}0.5{% elif message == "Red Cross: -£2.5" %}2.5{% else %}1{% endif %}</b>.
+          <br><br>Player B had the opportunity to share this information with you and decided to do so.
+      </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    {% next_button %}
+{% endblock %}
+
+
+

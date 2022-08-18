@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+    Task 1
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="card">
+  <div class="card-body">
+
+
+      {% if not reveal %} You chose not to reveal the scenario.
+          <div class="clearfix">
+          <img class="col-md-12 float-sm-end mb-12 ms-md-12" style="max-width:500px" src="{% static 'Twogames-text.jpg' %}"/></div>
+      {% elif reveal and scenario1 %} Here you see the scenario you are playing.
+          <div class="clearfix">
+          <img class="col-md-12 float-sm-end mb-12 ms-md-12" style="max-width:250px" src="{% static 'scenario1.jpg' %}"/></div>
+      {% elif reveal and not scenario1 %} Here you see the scenario you are playing.
+          <div class="clearfix">
+          <img class="col-md-12 float-sm-end mb-12 ms-md-12" style="max-width:250px" src="{% static 'scenario2.jpg' %}"/></div>
+      {% endif %}
+
+
+
+      <p> Please make your choice here:</p>
+
+      <button name="reveal" id="reveal" value=True class="btn btn-primary" disabled>Revealed scenario</button>
+      <button name="task1" id="task1" value="A" class="btn btn-outline-primary">Select option A</button>
+      <button name="task1" id="task1" value="B" class="btn btn-outline-primary">Select option B</button>
+
+
+
+  </div></div>
+
+{% endblock %}

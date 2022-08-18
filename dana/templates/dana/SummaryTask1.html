@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+    Summary of Task 1
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="card">
+  <div class="card-body">
+
+
+<p> This is the end of Task 1. If this task is selected for payment you will earn a bonus of
+    <b>{{ payoff1_self }}</b>{% if reveal %} and the Red Cross will earn a bonus of <b>{{ payoff1_charity }}</b>. </p>
+      {% else %}. After you complete both tasks,
+          you will be informed about the task selected for payment. </p> {% endif %}
+
+      <p> Press "Next" to begin with Task 2. Recall that these are independent tasks.</p>
+
+
+  </div></div>
+
+    <br>
+
+    {% next_button %}
+
+{% endblock %}

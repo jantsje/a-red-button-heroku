@@ -1,0 +1,60 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load otree %}
+
+{% block title %}
+    Practice Task 2 of Player A <span style="font-size:15px">{% if player.role == "Sender" %}(you are Player B) {% else %} (you) {% endif %}</span>
+{% endblock %}
+
+{% block styles %}
+    {% include 'snippets/Button_style.html' %}
+        <style>
+    .btn--action {
+        background-color: indianred;
+        transform: translateY(2px);
+        }
+    </style>
+
+{% endblock %}
+
+{% block scripts %}
+        <script>
+        let customTimerEle = document.getElementById('mins-left');
+        let customTimer2 = document.getElementById('secs-left');
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            $('.otree-timer__time-left').on('update.countdown', function (event) {
+                customTimerEle.innerText = event.offset.totalMinutes;
+                customTimer2.innerText = event.offset.totalSeconds - event.offset.totalMinutes*60;
+
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+ <div class="alert alert-secondary" role="alert">
+  This page will automatically submit in <b>
+   <span id="mins-left"></span> minutes and <span id="secs-left"></span> seconds</b>.
+
+ <br><br>
+
+       <h5>You clicked the button. Please wait until the page submits.</h5>
+
+ <br><br>
+
+
+  <div class="col-12">
+      <button name="button_test" value="True" class="btn btn--action" disabled><br>
+          <br><p> You clicked this button: </p><br>
+          <h4>You: +&pound;{{ Constants.optionB }}</h4>
+        <h4> Red Cross: ??? </h4>
+          <br><br><br>
+
+        </button></div>
+    <br><br><br>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Final Questionnaire
+    {% if too_long %}
+    {% else %}(6/6)
+    {% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+
+<div class="card"><div class="card-body"><p>
+
+
+        {% for field in form %}
+        {% if field.name == "gender" %}
+            <b>{{ field.label }}</b><br>
+            {{ field }}
+        {% elif field.name == "age" %}
+            <b>{{ field.label }}</b>
+            <div class="input-group col-xs-1">
+            <div class="input-group-input">
+            <input class="form-control" type="number" aria-describedby="help-age" name='age' id='age'
+                   min=18 max=120 autocomplete="off" required></div>
+            <span class="input-group-text" id = "help-age" class="text-muted"> {{field.help_text}}   </span>
+            </div>
+        {% elif field.name == "request_motivation" %} <br>
+            <b>Can you explain why you requested information about the consequences for the Red Cross?</b>
+            {{ field }}
+        {% elif field.name == "send_motivation1" %} <br>
+            <b>Can you explain why you informed Player A
+                about (one of) the consequences for the Red Cross?</b>
+            {{ field }}
+        {% elif field.name == "send_motivation2" %} <br>
+            <b>Can you explain why you did not inform Player A
+                about the consequences for the Red Cross?</b>
+            {{ field }}
+        {% elif field.name == "button_motivation" %} <br>
+        <b>Can you explain why you {% if not button %}did not press{% else %}pressed{% endif %} the button?</b><br>
+        {{ field }}
+        {% elif field.name == "punishment_motivation" %} <br>
+        <b>Can you explain why you
+            {% if treatment == "Symbolic Punishment" %} sent
+                {% if punished == 1 %} &#128544; as feedback
+                {% elif punished == 0 %} no feedback
+                {% endif %}?
+            {% else %}
+                {% if punished %}cancelled
+                {% else %}did not cancel
+                {% endif %} Player B's bonus payment?
+            {% endif %}</b><br>
+        {{ field }}
+
+        {% elif field.name == "feedback" %}<br>
+            <label><b>{{ field.label }}</b></label><br>
+            <textarea class="form-control" name="feedback" autocomplete="off"></textarea>
+
+        {% elif field.name == "feedback_pilot" %}<br>
+            <label><b>{{ field.label }}</b></label><br>
+            <textarea class="form-control" name="feedback_pilot" autocomplete="off"></textarea>
+
+        {% endif %}
+
+
+    {% endfor %}
+
+</div></div>
+    <br><br>
+
+{% next_button %}
+{% endblock %}

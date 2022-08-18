@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/GAMES THAT STILL NEED TO BE ADJUSTED TO OTREE LITE/classroom_aia" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/GAMES THAT STILL NEED TO BE ADJUSTED TO OTREE LITE/classroom_pgg" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/GAMES THAT STILL NEED TO BE ADJUSTED TO OTREE LITE/floodgame" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/GAMES THAT STILL NEED TO BE ADJUSTED TO OTREE LITE/floodgame_nonvr" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/GAMES THAT STILL NEED TO BE ADJUSTED TO OTREE LITE/floodgame_norms" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/GAMES THAT STILL NEED TO BE ADJUSTED TO OTREE LITE/floodgame_online" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/GAMES THAT STILL NEED TO BE ADJUSTED TO OTREE LITE/floodgame_vr" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/GAMES THAT STILL NEED TO BE ADJUSTED TO OTREE LITE/floodgame_vr_followup" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_REMOVE_SELF_BACKUP/escape" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dana" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/floodgame_norms" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/matching" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/the_button" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/wait" vcs="Git" />
+  </component>
+</project>
