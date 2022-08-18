@@ -1,0 +1,49 @@
+{% extends 'otree/WaitPage.html' %}
+
+{% block title %}
+    Please wait
+{% endblock %}
+{% block content %}
+
+
+    <p>
+    In Task 2 you will be matched with another participant.
+        Please wait for the other participant to join the task. </p>
+    <p>
+        If we do not find a match within {{ Constants.timeout }} minutes,
+        you will automatically proceed to the final questionnaire.
+        In this case, your bonus payment will be the one you obtained in Task 1.
+    </p>
+
+    <div class="progress">
+  <div id="progress" class="progress-bar-striped bg-primary" role="progressbar" style="width: 0%" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
+
+        <script>
+
+            let progress = js_vars.percent
+            $('#progress').css('width', progress+'%');
+
+        function timer() {
+            let progress = js_vars.percent
+            $('#progress').css('width', progress+'%');
+            console.log(progress)
+            window.location.reload()
+
+        }
+
+        var x = setInterval(timer, 1000);
+
+
+    </script>
+
+<style>
+.progress-bar-animated{
+    display:none
+}
+</style>
+
+
+
+{% endblock %}
