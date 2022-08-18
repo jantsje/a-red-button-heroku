@@ -7,13 +7,13 @@ SESSION_CONFIGS = [
 		display_name="Dana only",
 		num_demo_participants=1,
 		app_sequence=['dana']),
-	# dict(
-	# 	name='button_only1',
-	# 	display_name="Button only Baseline",
-	# 	treatment="Baseline",
-	# 	num_demo_participants=2,
-	# 	app_sequence=['the_button'],
-	# 	cc_code="CCCODE"),
+	dict(
+		name='button_only1',
+		display_name="Button only Baseline",
+		treatment="Baseline",
+		num_demo_participants=2,
+		app_sequence=['the_button'],
+		cc_code="CCCODE"),
 	# dict(
 	# 	name='button_only2',
 	# 	display_name="Button only Request",
