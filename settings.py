@@ -28,27 +28,27 @@ SESSION_CONFIGS = [
 		num_demo_participants=2,
 		app_sequence=['the_button'],
 		cc_code="CCCODE"),
-	dict(
-		name='button',
-		display_name="The Button (Control)",
-		num_demo_participants=10,
-		treatment="Baseline",
-		app_sequence=['dana', 'wait', 'the_button'],
-		cc_code="CCCODE"),
-	dict(
-		name='button_request',
-		display_name="The Button (Request)",
-		num_demo_participants=10,
-		treatment="Request",
-		app_sequence=['dana', 'wait', 'the_button'],
-		cc_code="CCCODE"),
-	dict(
-		name='button_request3',
-		display_name="The Button (Request+ Punishment)",
-		num_demo_participants=10,
-		treatment="Request + Punishment",
-		app_sequence=['dana', 'wait', 'the_button'],
-		cc_code="CCCODE"),
+	# dict(
+	# 	name='button',
+	# 	display_name="The Button (Control)",
+	# 	num_demo_participants=10,
+	# 	treatment="Baseline",
+	# 	app_sequence=['dana', 'wait', 'the_button'],
+	# 	cc_code="CCCODE"),
+	# dict(
+	# 	name='button_request',
+	# 	display_name="The Button (Request)",
+	# 	num_demo_participants=10,
+	# 	treatment="Request",
+	# 	app_sequence=['dana', 'wait', 'the_button'],
+	# 	cc_code="CCCODE"),
+	# dict(
+	# 	name='button_request3',
+	# 	display_name="The Button (Request+ Punishment)",
+	# 	num_demo_participants=10,
+	# 	treatment="Request + Punishment",
+	# 	app_sequence=['dana', 'wait', 'the_button'],
+	# 	cc_code="CCCODE"),
 ]
 DEBUG = False
 
@@ -83,6 +83,6 @@ Here are some oTree games.
 """
 
 
-SECRET_KEY = '2463227021408'
+SECRET_KEY = '{{ secret_key }}'
 
 INSTALLED_APPS = ['otree']
