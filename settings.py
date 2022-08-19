@@ -35,20 +35,20 @@ SESSION_CONFIGS = [
 		treatment="Baseline",
 		app_sequence=['dana', 'wait', 'the_button'],
 		cc_code="CCCODE"),
-	# dict(
-	# 	name='button_request',
-	# 	display_name="The Button (Request)",
-	# 	num_demo_participants=10,
-	# 	treatment="Request",
-	# 	app_sequence=['dana', 'wait', 'the_button'],
-	# 	cc_code="CCCODE"),
-	# dict(
-	# 	name='button_request3',
-	# 	display_name="The Button (Request+ Punishment)",
-	# 	num_demo_participants=10,
-	# 	treatment="Request + Punishment",
-	# 	app_sequence=['dana', 'wait', 'the_button'],
-	# 	cc_code="CCCODE"),
+	dict(
+		name='button_request',
+		display_name="The Button (Request)",
+		num_demo_participants=10,
+		treatment="Request",
+		app_sequence=['dana', 'wait', 'the_button'],
+		cc_code="CCCODE"),
+	dict(
+		name='button_request3',
+		display_name="The Button (Request+ Punishment)",
+		num_demo_participants=10,
+		treatment="Request + Punishment",
+		app_sequence=['dana', 'wait', 'the_button'],
+		cc_code="CCCODE"),
 ]
 DEBUG = False
 
