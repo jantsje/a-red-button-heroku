@@ -48,7 +48,7 @@
       <td>Not played</td><td></td>
   {% else %}
     <td>&pound;{{ payoff2_self }}
-        {% if punished and treatment == "Request + Punishment" %}(cancelled by Player A)
+        {% if punished and treatment == "Request + Punishment" %}(reduced by Player A)
         {% endif %}</td></td>
     <td>
     {% if player.role == "Receiver" %}

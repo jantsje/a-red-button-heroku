@@ -43,7 +43,8 @@
           <br><p> You clicked this button: </p><br>
           <h4>You: +&pound;{{ Constants.optionB }}</h4>
         <h4> {% if message == "" %}Red Cross: ???
-            {% else %} {{ message }}
+            {% else %} Red Cross:
+            {{ message.0 }}{{ message.1 }}{{ message.2 }}{% if message != "-£1.00" %}{{ message.3 }}{{ message.4 }}{% endif %}
         {% endif %} </h4>
           <br><br><br>
 

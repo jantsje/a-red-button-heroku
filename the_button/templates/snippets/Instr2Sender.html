@@ -8,19 +8,20 @@
         <p> The consequences for the Red Cross can take one of the following values with equal probability: </p>
         <p>
         <button class="btn btn-outline-secondary" disabled>
-            {{ Constants.payoffs_charity.0.0 }}&pound;{{ Constants.payoffs_charity.0.1 }}</button>
+            {{ Constants.payoffs_charity_str.0}}</button>
         <button class="btn btn-outline-secondary" disabled>
-            {{ Constants.payoffs_charity.1.0 }}&pound;{{ Constants.payoffs_charity.1.1 }}</button>
+            {{ Constants.payoffs_charity_str.1}}</button>
         <button class="btn btn-outline-secondary" disabled>
-            {{ Constants.payoffs_charity.2.0 }}&pound;{{ Constants.payoffs_charity.2.1 }}</button>
+            {{ Constants.payoffs_charity_str.2}}</button>
         <button class="btn btn-outline-secondary" disabled>
-            {{ Constants.payoffs_charity.3.0 }}&pound;{{ Constants.payoffs_charity.3.1 }}</button>
+            {{ Constants.payoffs_charity_str.3}}</button>
         <br>
 </p>
 
-        <p> We will ask you to decide for each of the possible consequences for the Red Cross without knowing which
+        <p> We will ask you to decide for each of the possible consequences for the Red Cross whether you want to
+            inform Player A, without knowing which
             consequence is selected. After that, the actual consequence will be randomly selected by the computer
-            and your choice will be implemented. <br>If you chose to send a message for the selected consequence,
+            and your choice will be implemented. If you chose to send a message for the selected consequence,
             you <b>{% if treatment == "Sending Positive" %}receive {% else %}pay{% endif %}
                 the amount of {{ player.cost_of_sending }} pence</b>,
             resulting in a bonus payment of {{player.bonus_minus_cost}} pence.
@@ -37,8 +38,8 @@
     {% if treatment == "Request + Punishment" %}
       <h5>Player’s A final decision </h5>
       <p> Player A has a final decision to make at the end of the task.
-          The player has to choose whether to <b>confirm
-              or to cancel </b> your bonus payment.
+          The player has to choose whether to <b>confirm</b> your bonus payment
+              or to <b>reduce it by {{ Constants.punishment }} pence</b>.
           You will be informed of your final bonus and of Player A’s choice at the end of the experiment.</p>
 
     {% elif treatment == "Symbolic Punishment" %}

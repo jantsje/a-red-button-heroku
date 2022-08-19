@@ -217,7 +217,7 @@ class SummaryTask2(Page):
         vars_for_this_template = dict(
                     request=self.player.request,
                     button=self.player.button,
-                    payoff2_self=self.participant.vars["payoff2_self_p"],
+                    payoff2_self=str(self.participant.vars["payoff2_self"]) + " pence",
                     message=self.player.selected_message,
                     punished=self.player.punished,
                     punishment=self.player.punishment,

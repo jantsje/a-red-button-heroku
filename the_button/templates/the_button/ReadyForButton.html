@@ -21,17 +21,15 @@
 {% if informed %}
     In their task, Player B was informed that the button on your screen gives you a bonus of &pound;{{Constants.optionB}}
           but produces also negative consequences for the Red Cross.
-          </p><p>
-          Pressing the button, you will <b>reduce</b> the total amount donated to the Red Cross
-          at the end of this study by
-             <b> &pound;{% if message == "Red Cross: -£0.5" %}0.5{% elif message == "Red Cross: -£2.5" %}2.5{% else %}1{% endif %}</b>.
-          Player B had the opportunity to share this information with you and decided to do so.
-      </p>
+          </p>
+{% include 'snippets/pressing.html' %}
+
 {% endif %}
 
 <p>Please press "Next" to start with Task 2.</p>
  </div></div><br>
 
+    {% if informed %}
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -47,12 +45,14 @@
 
           Before making your choice there is an important piece of <b>information that Player B wants to share with you.</b>
           In their task, Player B was informed that the button on your screen gives you a bonus of &pound;{{Constants.optionB}}
-          but produces also <b><span style="color:red">negative consequences<span/></b> for the Red Cross.
+          but produces also
+          <b>{% if message.0 == "-" %}<span style="color:red">negative consequences</span>
+              {% else %}positive consequences
+          {% endif %}</b>
+          for the Red Cross.
           </p><p>
-          Pressing the button, you will <b>reduce</b> the total amount donated to the Red Cross
-          at the end of this study by
-             <b> &pound;{% if message == "Red Cross: -£0.5" %}0.5{% elif message == "Red Cross: -£2.5" %}2.5{% else %}1{% endif %}</b>.
-          <br><br>Player B had the opportunity to share this information with you and decided to do so.
+{% include 'snippets/pressing.html' %}
+
       </p>
       </div>
       <div class="modal-footer">
@@ -61,7 +61,7 @@
     </div>
   </div>
 </div>
-
+{% endif %}
     {% next_button %}
 {% endblock %}
 

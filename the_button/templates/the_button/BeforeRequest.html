@@ -17,13 +17,14 @@
 </p>
 
 
-      <p>Before you and Player B make your choices, you have the opportunity to inform Player Be about your preference
+      <p>Before you and Player B make your choices, you have the opportunity to inform Player B about your preference
       to have or not to have information. </p>
   {% if treatment == "Request + Punishment" %}
       <p>
       Moreover, at the very end of the task, when all choices have been made, you have a final decision to make.
-          You will choose whether to <b>confirm or to reduce</b>
-          Player B’s bonus payment by {{ Constants.punishment }} pence for Task 2.
+          You will choose whether to <b>confirm</b> Player B’s bonus payment  </b>
+          or to <b>reduce it
+          by {{ Constants.punishment }} pence</b>.
       </p>
 
   {% endif %}

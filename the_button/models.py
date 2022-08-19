@@ -29,7 +29,8 @@ class Constants(BaseConstants):
     # Button payoffs
     optionA = [0, 0]  # bonus payments NO CLICK [receiver, charity] - in pence
     optionB = 1  # bonus payment CLICK - in pound
-    payoffs_charity = [["-", 2.5], ["-", 1], ["-", 0.5], ["+", 0.5]]
+    payoffs_charity = [["-", 2.50], ["-", 1.00], ["-", 0.50], ["+", 0.50]]
+    payoffs_charity_str = ["-£2.50", "-£1.00", "-£0.50", "+£0.50"]
 
     punishment = 20  # punishment budget in pence
     payoff_sender = 50
@@ -103,16 +104,16 @@ class Group(BaseGroup):
             receiver.informed = False
             sender.informed = False
         else:
-            sender.selected_message = "message " + str(Constants.payoffs_charity[selected_situation][1])
+            sender.selected_message = str(Constants.payoffs_charity[selected_situation][0]) + "£" + \
+                                      str(format(Constants.payoffs_charity[selected_situation][1], ".2f"))
             amount0 = Constants.payoffs_charity[selected_situation][0]
             amount1 = Constants.payoffs_charity[selected_situation][1]
             receiver.informed = True
             sender.informed = True
             if amount1 > 0:
-                receiver.selected_message = "Red Cross: " + \
-                                   str(amount0) + "£" + str(amount1)
+                receiver.selected_message = str(amount0) + "£" + str(format(amount1, ".2f"))
                 receiver.participant.vars["message"] = "Red Cross: " + \
-                                   str(amount0) + "£" + str(amount1)
+                                   str(amount0) + "£" + str(format(amount1, ".2f"))
             elif amount1 == 0 and amount0 != "-":
                 receiver.selected_message = "Red Cross not affected"
                 receiver.participant.vars["message"] = "Red Cross not affected"
@@ -123,6 +124,8 @@ class Group(BaseGroup):
         sender.punished = receiver.punishment
         sender.participant.vars['punished'] = sender.punished
         receiver.participant.vars['punishment'] = receiver.punishment
+        sender.participant.vars["payoff2_self"] = \
+            sender.participant.vars["payoff2_self"] - Constants.punishment * sender.punished
 
 
 class Player(BasePlayer):
@@ -211,14 +214,11 @@ class Player(BasePlayer):
                 message = 0
             else:
                 message = 1
-            self.participant.vars["payoff2_self"] = Constants.payoff_sender - self.participant.vars["cost_of_sending"] * message
-            if self.session.vars["treatment"] == "Punishment":
-                if self.participant.vars['punished'] == 1:
-                    self.participant.vars["payoff2_self"] = 0
-            elif self.session.vars["treatment"] == "Sending Positive":
+            self.participant.vars["payoff2_self"] = Constants.payoff_sender - \
+                                                    self.participant.vars["cost_of_sending"] * message
+            if self.session.vars["treatment"] == "Sending Positive":
                 self.participant.vars["payoff2_self"] = Constants.payoff_sender + self.participant.vars[
                     "cost_of_sending"] * message
-            self.participant.vars["payoff2_self_p"] = str(self.participant.vars["payoff2_self"]) + ' pence'
 
     def set_payoffs_receiver(self):
         try:
@@ -256,13 +256,17 @@ class Player(BasePlayer):
             self.participant.vars["payoff2_charity_p"] = "game not played"
             self.participant.vars["message"] = ""
         else:
+            print(self.participant.vars["payoff2_self"], 'payoff2_self in final payoffs calc')
             self.participant.vars["message"] = self.participant.vars["message"]
             if self.participant.vars["payoff2_self"] == 1:
                 self.participant.vars["payoff2_self"] = "1.00"
             elif self.participant.vars["payoff2_self"] < 1:
                 self.participant.vars["payoff2_self"] = f'{self.participant.vars["payoff2_self"]:.2f}'
+            elif self.participant.vars["payoff2_self"] > 1:
+                self.participant.vars["payoff2_self"] = f'{self.participant.vars["payoff2_self"] / 100:.2f}'
             else:
-                self.participant.vars["payoff2_self"] = f'{self.participant.vars["payoff2_self"]/100:.2f}'
+                self.participant.vars["payoff2_self"] = self.participant.vars["payoff2_self"]
+
         self.payoff2_self = self.participant.vars["payoff2_self"]  # to store to the oTree database
         self.payoff2_charity = str(self.participant.vars["payoff2_charity"])
 
@@ -297,10 +301,10 @@ class Player(BasePlayer):
                                         "randomly selects this consequence to be implemented"],
                 'correct': str(cost) + " pence, but only if the computer "
                                        "randomly selects this consequence to be implemented"}]
-        if self.session.vars["treatment"] == "Punishment":
+        if self.session.vars["treatment"] == "Request + Punishment":
             questions.append(
                 {
-                    'question': 'When can player A cancel your bonus?',
+                    'question': 'When can player A reduce your bonus?',
                     'options': ["Never", "Always",
                                 "Only if I communicated information about the consequence selected by the computer"],
                     'correct': "Only if I communicated information about the consequence selected by the computer",

@@ -50,7 +50,7 @@
     Your initial bonus payment is  {{ Constants.payoff_sender }} pence.
 
       {% if treatment == "Request + Punishment" %}
-          At the end of the task, Player A has the opportunity to cancel your bonus.
+          At the end of the task, Player A has the opportunity to reduce your bonus.
       {% endif %}
       <br><br>
 
@@ -88,20 +88,17 @@
       </tr>
   </thead>
 
-        {% for amount in Constants.payoffs_charity %}
+        {% for amount in Constants.payoffs_charity_str %}
 
     <tr>
-    <td>Player A: <b>+&pound;{{ Constants.optionB }}</b>, Red Cross:
-        {% if amount.0 == "-" %}<b>{{ amount.0 }}&pound;{{ amount.1 }}<b/>
-        {% elif amount.1 == 0 %}<b>&pound;0<b/>
-        {% else %}<b>{{ amount.0 }}&pound;{{ amount.1 }}</b>
-        {% endif %}
+    <td>Player A: <b>+&pound;{{ Constants.optionB }}.00</b>, Red Cross:
+        {{ amount }}
     </td>
     <td>
        <div class="form-group col-sm-7" style="margin-bottom:0">
       <select name="message_{{ forloop.counter |json }}" class="form-control" style="min-width: 500px" required>
         <option value="" selected>Please make your choice...</option>
-        <option value="True">Tell Player A that pressing the button leads to a &pound;{{ amount.1 }}
+        <option value="True">Tell Player A that pressing the button leads to a &pound;{{ amount.2 }}{{ amount.3 }}{{ amount.4 }}{{ amount.5 }}
             {% if amount.0 == "-" %}reduction{% else %}increase {% endif %}
             of the Red Cross bonus</option>
         <option value="False">Don’t tell Player A about the consequences of pressing the button.
