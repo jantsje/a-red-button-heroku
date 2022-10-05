@@ -11,7 +11,7 @@
 <div class="card">
   <div class="card-body">
       Before ending the task, we ask you to make one final choice.
-      Player B decided to <b>share information</b> with you about the consequences for the Red Cross.
+      Player B decided <b>{% if not informed %}not {% endif %} to share information</b> with you about the consequences for the Red Cross.
       {% if treatment == "Symbolic Punishment" %}
       <br><br> Now you have the opportunity to send them feedback about their decision to share information.
       You can send feedback by pressing on one of the following buttons:
@@ -22,7 +22,8 @@
 
 </p>
       {% elif treatment == "Request + Punishment" %}
-<p>    <br> Now you have the opportunity confirm or reduce the {{ player.bonus_minus_cost }} pence bonus payment for Player B
+<p>    <br> Now you have the opportunity confirm or reduce the
+    {% if informed %}{{ player.bonus_minus_cost }}{% else %}{{ Constants.payoff_sender}} {% endif %} pence bonus payment for Player B
     in response to their decision to share information.
     Make your choice below.
 </p>

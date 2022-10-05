@@ -124,7 +124,7 @@ class SelectMessage(Page):
 
     def before_next_page(self):
         self.group.store_message()
-        self.player.set_payoffs_sender()
+        self.player.subtract_cost_of_sending()
 
     def vars_for_template(self):
         vars_for_this_template = dict()
@@ -161,7 +161,7 @@ class Button(Page):
         return self.player.role == Constants.receiver_role and not self.player.participant.vars["too_long"]
 
     def before_next_page(self):
-        self.player.set_payoffs_receiver()
+        self.player.set_payoffs_receiver_button()
 
 
 class ButtonClicked(Page):
@@ -188,7 +188,8 @@ class FinalChoice(Page):
     form_fields = ['punishment']
 
     def vars_for_template(self):
-        return dict(message=self.player.selected_message,
+        return dict(informed=self.player.informed,
+                    message=self.player.selected_message,
                     button=self.player.button,
                     request=self.player.request)
 
@@ -214,10 +215,15 @@ class SummaryTask2(Page):
     form_model = 'player'
 
     def vars_for_template(self):
+        payoff = str(self.participant.vars["payoff2_self"])
+        if payoff == "1":
+            payoff = "1 pound"
+        else:
+            payoff = payoff + " pence"
         vars_for_this_template = dict(
                     request=self.player.request,
                     button=self.player.button,
-                    payoff2_self=str(self.participant.vars["payoff2_self"]) + " pence",
+                    payoff2_self=payoff,
                     message=self.player.selected_message,
                     punished=self.player.punished,
                     punishment=self.player.punishment,
@@ -245,8 +251,7 @@ class FinalQuestions(Page):
                 form_fields.append('request_motivation')
             if self.player.role == "Receiver":
                 form_fields.append('button_motivation')
-                if (self.session.vars["treatment"] == "Punishment" or
-                        self.session.vars["treatment"] == "Symbolic Punishment") and self.player.informed:
+                if self.session.vars["treatment"] == "Request + Punishment":
                     form_fields.append('punishment_motivation')
 
         form_fields.append('feedback_pilot')
@@ -300,6 +305,9 @@ class FinalQuestions2a(Page):
     def is_displayed(self):
         return not self.player.participant.vars["too_long"]
 
+    def vars_for_template(self):
+        return dict(payoff2_self=self.participant.vars["payoff2_self"])
+
     def before_next_page(self):
         if self.player.role == "Sender":
             self.player.set_payoffs_sender()
@@ -338,7 +346,6 @@ class PaymentSelected(Page):
                 payoff2_charity_neg = False
         except TypeError:
             payoff2_charity_neg = False
-            print('typerror, but ', self.player.participant.vars["payoff2_charity"], ' = payoff2_charity')
         return dict(
             payoff1_self=self.player.participant.vars["payoff1_self"],
             payoff1_charity=self.player.participant.vars["payoff1_charity"],

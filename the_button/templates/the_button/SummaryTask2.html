@@ -20,7 +20,8 @@
 
     {% if player.role == "Sender" %}
         The consequence selected by the computer is <b>{{ message }}</b>.
-        <br>You decided <b>{% if not informed %} not {% endif %}to inform</b> Player A about this.
+        <br>You decided <b>{% if not informed %} not {% endif %}to inform</b> Player A about
+        this{% if informed %}at a cost of {{ Constants.cost_of_sending_baseline}} pence{% endif %}.
 
 
         <p> {% if treatment == "Request + Punishment"%}
@@ -28,7 +29,11 @@
                 {% if punished == 1 %} <b>reduce </b> your bonus payment by {{ Constants.punishment }} pence. <br>
                 {% else %} <b>confirm</b> your bonus payment. <br>
                 {% endif %}
-            If this task is selected for payment, you will earn a bonus payment of <b>{{ payoff2_self }}</b>.<br>
+            If this task is selected for payment, you will earn a bonus payment of
+            {% if punished or informed %}{{ Constants.payoff_sender }} {% endif %}
+                {% if informed %} - {{ Constants.cost_of_sending_baseline }} {% endif %}
+            {% if punished == 1 %} - {{ Constants.punishment }} {% endif %} {% if punished or informed %}={% endif %}
+            <b>{{ payoff2_self }}</b>.<br>
             {% elif treatment == "Symbolic Punishment" and informed %}
                 {% if punished == 1 %} Player A sent you the following feedback: <p style="font-size:50px">&#128544; </p>
                 {% elif punished == 0 %} <p style="font-size:20px">Player A did not send you feedback. </p>

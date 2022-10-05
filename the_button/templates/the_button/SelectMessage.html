@@ -17,23 +17,26 @@
 {% block content %}
 {% if treatment == "Request" or treatment == "Request + Punishment" %}
 
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Attention!!</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Request</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
       <p>
-
-
-            {% if request == "True" %} Message from Player A: <br><br><i><b>Please replace ??? by the actual consequences for the Red Cross.</b></i>
-            {% else %} Player A did <b>not</b> request information about the consequences for the Red Cross.
-            {% endif %}
+    {% if request == "no_request" %}
+            Player A did not send you a request.
+    {% else %}
+        Message from Player A:
+<br><br><i><b>Please {% if request == "request_no_info" %} do not {% endif %} replace ??? by the actual consequences for the Red Cross.</b></i>
+{% endif %}
       </p>
       </div>
       <div class="modal-footer">
@@ -67,17 +70,15 @@
 
       <br><br>
 
-        {% if treatment == "Symbolic Punishment" %}
-          After receiving information, Player A has the opportunity to send you feedback. <br><br> {% endif %}
-
       {% if treatment == "Request" or treatment == "Request + Punishment" %}
-
         <div class="alert alert-info" role="alert">
-            {% if request == "True" %} Message from Player A: <i><b>Please replace ??? by the actual consequences for the Red Cross.</b></i>
-            {% else %} Player A did <b>not</b> request information about the consequences for the Red Cross.
-            {% endif %}
+        {% if request == "no_request" %}
+            Player A did not send you a request.
+        {% else %}
+        Message from Player A: &nbsp; &nbsp;
+        <i><b>Please {% if request == "request_no_info" %} do not {% endif %} replace ??? by the actual consequences for the Red Cross.</b></i>
+        {% endif %}
         </div>
-
     {% endif %}
 
 <table style="width:900px;" class="table table-bordered table-sm">

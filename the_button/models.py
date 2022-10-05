@@ -148,9 +148,8 @@ class Player(BasePlayer):
     total_payoff = models.FloatField()
     payoff2_self = models.StringField()  # payoff task 2 (button)
     payoff2_charity = models.StringField()  # payoff task 2 (button)
-    request = models.StringField(choices=["True", "False"],
-                                 widget=widgets.CheckboxInput,
-                                 blank="False")
+    request = models.StringField(choices=["request_info", "request_no_info", "no_request"],
+                                 widget=widgets.RadioSelect)
     message_1 = models.StringField()
     message_2 = models.StringField()
     message_3 = models.StringField()
@@ -208,7 +207,7 @@ class Player(BasePlayer):
             else:
                 self.selected = random.choice([1, 2])
 
-        # payoffs Task 2 (Button)
+    def subtract_cost_of_sending(self):
         if not self.participant.vars["too_long"]:
             if self.selected_message == "no message":
                 message = 0
@@ -216,9 +215,6 @@ class Player(BasePlayer):
                 message = 1
             self.participant.vars["payoff2_self"] = Constants.payoff_sender - \
                                                     self.participant.vars["cost_of_sending"] * message
-            if self.session.vars["treatment"] == "Sending Positive":
-                self.participant.vars["payoff2_self"] = Constants.payoff_sender + self.participant.vars[
-                    "cost_of_sending"] * message
 
     def set_payoffs_receiver(self):
         try:
@@ -230,7 +226,7 @@ class Player(BasePlayer):
             else:
                 self.selected = random.choice([1, 2])
 
-        # payoffs Task 2 (Button)
+    def set_payoffs_receiver_button(self):
         if not self.participant.vars["too_long"]:
             if self.button:
                 self.participant.vars["payoff2_self"] = Constants.optionB
@@ -256,7 +252,6 @@ class Player(BasePlayer):
             self.participant.vars["payoff2_charity_p"] = "game not played"
             self.participant.vars["message"] = ""
         else:
-            print(self.participant.vars["payoff2_self"], 'payoff2_self in final payoffs calc')
             self.participant.vars["message"] = self.participant.vars["message"]
             if self.participant.vars["payoff2_self"] == 1:
                 self.participant.vars["payoff2_self"] = "1.00"
@@ -305,8 +300,8 @@ class Player(BasePlayer):
             questions.append(
                 {
                     'question': 'When can player A reduce your bonus?',
-                    'options': ["Never", "Always",
+                    'options': ["Never", "At the end of the task",
                                 "Only if I communicated information about the consequence selected by the computer"],
-                    'correct': "Only if I communicated information about the consequence selected by the computer",
+                    'correct': "At the end of the task",
                 })
         return questions

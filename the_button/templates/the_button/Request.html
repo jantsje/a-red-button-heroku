@@ -15,22 +15,27 @@
 
 </p>
 
-      <p>Tick the box below if you want to send the following request to Player B:</p>
+      <p>Remember, you are matched with Player B, who has the opportunity to inform you about the consequences for the Red Cross if you decide to click the button.
+         If they decide to do so, this will replace the "???" on the button by the actual payoff consequences for the Red Cross. </p>
+      <p>Here, you have the opportunity to inform Player B about your preference to have or not to have information:</p>
 
         {% for field in form %}
 
-                <input type="checkbox" name="request" value="True" id="request">
-            <label for="request"><i><h6>Please replace ??? by the actual consequences for the Red Cross.</h6></i></label><br>
+
+            <input type="radio" required name="request" value="request_info" id="request_info">
+            <label for="request_info"><i><b>Please replace ??? by the actual consequences for the Red Cross.</b></i></label><br>
+            <input type="radio" required name="request" value="request_no_info" id="request_no_info">
+            <label for="request_no_info"><i><b>Please do not replace ??? by the actual consequences for the Red Cross.</b></i></label><br>
+            <input type="radio" required name="request" value="no_request" id="no_request">
+            <label for="no_request"><i><b>Do not send any request to Player B.</b></i></label><br>
+
+
+
 
         {% endfor %}
   {{ form.request.errors }}
 
-      <p> If you do not want to send the request, don’t tick the box.
-          In this case Player B will receive the following information:<br>
-          <i>Player A did not request information about the consequences for the Red Cross.</i>
-</p>
-
-  <p>After you make your choice, press next to proceed. </p>
+  <p><br>After you make your choice, press next to proceed. </p>
   </div>
 </div>
 <br>
