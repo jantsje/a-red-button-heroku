@@ -27,20 +27,6 @@
             resulting in a bonus payment of {{player.bonus_minus_cost}} pence.
         </p>
 
-    {% if treatment == "Request" or treatment == "Request + Punishment" %}
-        <h5>Request </h5>
-        <p> Before making any choice, Player A has the opportunity to send you a request.
-        Player A can ask you to provide or not information about the consequences for the Red Cross.
-        You will receive Player A’s request before making your choice. </p>
-    {% endif %}
 
-
-    {% if treatment == "Request + Punishment" %}
-      <h5>Player’s A final decision </h5>
-      <p> Player A has a final decision to make at the end of the task.
-          The player has to choose whether to <b>confirm</b> your bonus payment
-              or to <b>reduce it by {{ Constants.punishment }} pence</b>.
-          You will be informed of your final bonus and of Player A’s choice at the end of the experiment.</p>
-    {% endif %}
 
 

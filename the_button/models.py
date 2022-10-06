@@ -148,7 +148,7 @@ class Player(BasePlayer):
     total_payoff = models.FloatField()
     payoff2_self = models.StringField()  # payoff task 2 (button)
     payoff2_charity = models.StringField()  # payoff task 2 (button)
-    request = models.StringField(choices=["request_info", "request_no_info", "no_request"],
+    request = models.StringField(choices=["request_info", "request_no_info"],
                                  widget=widgets.RadioSelect)
     message_1 = models.StringField()
     message_2 = models.StringField()

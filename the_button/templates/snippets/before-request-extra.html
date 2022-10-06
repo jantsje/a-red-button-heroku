@@ -1,0 +1,45 @@
+
+   {% if player.role == "Sender" %}
+
+        {% if treatment == "Request" or treatment == "Request + Punishment" %}
+            <h5>Request </h5>
+            <p> Before making any choice, Player A has the opportunity to send you a request.
+            Player A can ask you to provide or not information about the consequences for the Red Cross.
+            You will receive Player A’s request before making your choice. </p>
+        {% endif %}
+
+
+        {% if treatment == "Request + Punishment" %}
+          <h5>Player’s A final decision </h5>
+          <p> Player A has a final decision to make at the end of the task.
+              The player has to choose whether to <b>confirm</b> your bonus payment
+                  or to <b>reduce it by {{ Constants.punishment }} pence</b>.
+              You will be informed of your final bonus and of Player A’s choice at the end of the experiment.</p>
+        {% endif %}
+
+    {% elif player.role == "Receiver" %}
+
+              <p>Please note that the button did not specify the bonus for the Red Cross: it was concealed by "<b>???</b>".
+              </p>
+              <p>Player B has the possibility to inform you about the actual consequences for the Red Cross.
+              If they decide to do so, the "???" on the button will be replaced by the actual consequences.</p>
+
+           {% if treatment == "Request" or treatment == "Request + Punishment" %}
+
+            <h5>Request</h5>
+              <p>Before you and Player B make your choices, you have the opportunity to inform Player B about your preference
+              to have or not to have information. </p>
+          {% endif %}
+          {% if treatment == "Request + Punishment" %}
+              <p>
+              <h5>A final decision </h5>
+              Moreover, at the very end of the task, when all choices have been made, you have a final decision to make.
+                  You will choose whether to <b>confirm</b> Player B’s bonus payment  </b>
+                  or to <b>reduce it
+                  by {{ Constants.punishment }} pence</b>.
+              </p>
+
+          {% endif %}
+
+
+    {% endif %}

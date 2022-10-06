@@ -37,7 +37,7 @@ class BeforeRequest(Page):
     form_model = 'player'
 
     def is_displayed(self):
-        return self.player.role == Constants.receiver_role and self.session.vars["treatment"] != "Baseline" \
+        return self.session.vars["treatment"] != "Baseline" \
                and not self.player.participant.vars["too_long"]
 
 
@@ -265,55 +265,100 @@ class FinalQuestions(Page):
                     informed=self.player.informed,
                     request=self.player.request)
 
+    def before_next_page(self):
+        if self.player.role == "Sender":
+            self.player.set_payoffs_sender()
+            self.player.final_payoffs()
 
-class FinalQuestions2(Page):
+
+class FinalQuestions2R(Page):
     form_model = 'player'
     form_fields = ['belief1']
 
     def is_displayed(self):
-        return not self.player.participant.vars["too_long"]
+        return not self.player.participant.vars["too_long"] and self.player.role == "Receiver"
 
 
-class FinalQuestions2b(Page):
+class FinalQuestions2bR(Page):
     form_model = 'player'
     form_fields = ['belief2']
 
     def is_displayed(self):
-        return not self.player.participant.vars["too_long"]
+        return not self.player.participant.vars["too_long"] and self.player.role == "Receiver"
 
 
-class FinalQuestions2c(Page):
+class FinalQuestions2cR(Page):
     form_model = 'player'
     form_fields = ['belief3']
 
     def is_displayed(self):
-        return not self.player.participant.vars["too_long"]
+        return not self.player.participant.vars["too_long"] and self.player.role == "Receiver"
 
 
-class FinalQuestions2d(Page):
+class FinalQuestions2dR(Page):
     form_model = 'player'
     form_fields = ['belief4']
 
     def is_displayed(self):
-        return not self.player.participant.vars["too_long"]
+        return not self.player.participant.vars["too_long"] and self.player.role == "Receiver"
 
 
-class FinalQuestions2a(Page):
+class FinalQuestions2aR(Page):
     form_model = 'player'
     form_fields = ['belief0']
 
     def is_displayed(self):
-        return not self.player.participant.vars["too_long"]
+        return not self.player.participant.vars["too_long"] and self.player.role == "Receiver"
 
     def vars_for_template(self):
         return dict(payoff2_self=self.participant.vars["payoff2_self"])
 
     def before_next_page(self):
-        if self.player.role == "Sender":
-            self.player.set_payoffs_sender()
-        else:
-            self.player.set_payoffs_receiver()
+        self.player.set_payoffs_receiver()
         self.player.final_payoffs()
+
+
+class FinalQuestions2S(Page):
+    form_model = 'player'
+    form_fields = ['belief1']
+
+    def is_displayed(self):
+        return not self.player.participant.vars["too_long"] and self.player.role == "Sender"
+
+
+class FinalQuestions2bS(Page):
+    form_model = 'player'
+    form_fields = ['belief2']
+
+    def is_displayed(self):
+        return not self.player.participant.vars["too_long"] and self.player.role == "Sender"
+
+
+class FinalQuestions2cS(Page):
+    form_model = 'player'
+    form_fields = ['belief3']
+
+    def is_displayed(self):
+        return not self.player.participant.vars["too_long"] and self.player.role == "Sender"
+
+
+class FinalQuestions2dS(Page):
+    form_model = 'player'
+    form_fields = ['belief4']
+
+    def is_displayed(self):
+        return not self.player.participant.vars["too_long"] and self.player.role == "Sender"
+
+
+class FinalQuestions2aS(Page):
+    form_model = 'player'
+    form_fields = ['belief0']
+
+    def is_displayed(self):
+        return not self.player.participant.vars["too_long"] and self.player.role == "Sender"
+
+    def vars_for_template(self):
+        return dict(payoff2_self=self.participant.vars["payoff2_self"])
 
 
 class Payment(Page):
@@ -375,8 +420,13 @@ page_sequence = [
     TestButton,
     TestButtonClicked,
     InstructionsSender,
-    Task2Check,
+    FinalQuestions2S,
+    FinalQuestions2bS,
+    FinalQuestions2cS,
+    FinalQuestions2dS,
+    FinalQuestions2aS,
     BeforeRequest,
+    Task2Check,
     Request,
     WaitForRequest,
     SelectMessage,
@@ -387,11 +437,11 @@ page_sequence = [
     FinalChoice,
     WaitForFinalChoice,
     SummaryTask2,
-    FinalQuestions2,
-    FinalQuestions2b,
-    FinalQuestions2c,
-    FinalQuestions2d,
-    FinalQuestions2a,
+    FinalQuestions2R,
+    FinalQuestions2bR,
+    FinalQuestions2cR,
+    FinalQuestions2dR,
+    FinalQuestions2aR,
     FinalQuestions,
     Payment,
     PaymentSelected,
