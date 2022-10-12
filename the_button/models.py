@@ -93,10 +93,12 @@ class Group(BaseGroup):
         sender.participant.vars["message"] = ""
         receiver = self.get_player_by_role(Constants.receiver_role)
         selected_situation = random.choice(range(0, len(Constants.payoffs_charity)))
+        receiver.consequence = ''
         messages = [sender.message_1, sender.message_2, sender.message_3, sender.message_4]
         self.messages_num = messages.count("True")
         receiver.payoff_charity = str(Constants.payoffs_charity[selected_situation][0]) + "£" + \
                                   str(f'{Constants.payoffs_charity[selected_situation][1]:.2f}')
+        sender.consequence = receiver.payoff_charity
         if messages[selected_situation] == "False":
             sender.selected_message = "no message"
             receiver.selected_message = ""
@@ -140,6 +142,7 @@ class Player(BasePlayer):
     button = models.BooleanField(initial=0)
     button_test = models.BooleanField(initial=0)
     message = models.StringField()
+    consequence = models.StringField()
     payoff_charity = models.StringField()
     punishment = models.IntegerField()
     punished = models.IntegerField()

@@ -221,6 +221,7 @@ class SummaryTask2(Page):
         else:
             payoff = payoff + " pence"
         vars_for_this_template = dict(
+                    consequence=self.player.consequence,
                     request=self.player.request,
                     button=self.player.button,
                     payoff2_self=payoff,

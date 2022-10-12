@@ -19,7 +19,7 @@
 <p> This is the end of Task 2.
 
     {% if player.role == "Sender" %}
-        The consequence selected by the computer is <b>{{ message }}</b>.
+        The consequence selected by the computer is <b>{{ consequence }}</b>.
         <br>You decided <b>{% if not informed %} not {% endif %}to inform</b> Player A about
         this{% if informed %}, at a cost of {{ Constants.cost_of_sending_baseline}} pence{% endif %}.
 
