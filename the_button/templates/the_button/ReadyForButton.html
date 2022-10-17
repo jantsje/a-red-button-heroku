@@ -19,7 +19,11 @@
     Player B did not share any information with you about the consequences of the button-press for the Red Cross. </p>
 {% else %}
     In their task, Player B was informed that the button on your screen gives you a bonus of &pound;{{Constants.optionB}}
-          but produces also negative consequences for the Red Cross.
+          but produces also
+          <b>{% if message.0 == "-" %}<span style="color:red">negative consequences</span>
+              {% else %}positive consequences
+          {% endif %}</b>
+          for the Red Cross.
           </p>
 {% include 'snippets/pressing.html' %}
 
