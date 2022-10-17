@@ -2,9 +2,12 @@
 {% load otree %}
 
 {% block title %}
-    What do you think others will do? (5/5)
+    What do you think others will do? {% if player.role == "Receiver" %}(1/5) {% endif %}
 {% endblock %}
 
+{% block scripts %}
+{% include 'snippets/slider.html' %}
+{% endblock %}
 
 {% block styles %}
     {% include 'snippets/Button_style.html' %}
@@ -21,56 +24,33 @@
 
 
 <div class="card"><div class="card-body">
-
-    <p>
-        We have one more question regarding the choice of Player A when <b>not informed</b>
+<div class="row">
+<div class="col-md-7 col-12">
+    <p> {% include 'snippets/intro-beliefs.html' %} </p><p>
+        {% if player.role == "Receiver" %}
+            Please think about the choice of Player A when <b>not informed</b>
         about the consequences for the Red Cross.
+
 
         We ask you to give your best estimate of how many players out of 100
         uninformed Players A clicked the button.
-
-        Enter a number between 0 and 100 players.
+        {% endif %}
     </p>
-
-<div class="row">
-<div class="col-md-7 col-12">
-
-<table style="width:900px;" class="table table-bordered table-sm">
-  <thead class="thead-light">
-  <tr>
-    <th style="min-width: 200px">Your estimate</th>
-      </tr>
-  </thead>
-
-    <td><div class="form-group col-sm-5" style="margin-bottom:0">
-    <div class="form-group has-error">
-  <div class="form-row align-items-center">
-    <div class="col-auto">
-      <div class="input-group">
-        <input name="belief0" required type="number" min="0"
-               max="100" id="belief0" autocomplete="off"
-                class="form-control" style="padding:0" >
-          <div class="input-group-append"><div class="input-group-text">out of 100 players</div> &nbsp; click the button
-          </div>
-      </div>
-    </div>
-  </div>
-</div>
+    <input type="range" name="belief0" min="0" max="100" id="belief0" class="form-control" oninput="updateDescription(this)">
+    <p id="description">Your estimate:</p>
+    <span style="color:red" id="warning"></span>
 
 
-        </div></td></tr>
-
-      </table>
 
     </div>
 <div class="col">
 <div class="alert-secondary">
-<br><br>
+<br>
       <button name="button_test" value="True" class="btn btn--action" disabled><br>
-        <br><p> If you click: <br><br> </p>
+        <br><br><p> If you click: <br><br> </p>
           <h4>You: +&pound;{{ Constants.optionB }}</h4>
           <h4> Red Cross: ??? </h4>
-          <br><br><br><br>
+          <br><br>
 
         </button><br><br></div>
 </div>
@@ -80,5 +60,8 @@
     </div>
     <br>
 
-{% next_button %}
+<button class="btn btn-primary" hidden id="submit">Next</button>
+<div class="btn btn-primary" onclick="checkMovedSlider()">Next</div>
+
+
 {% endblock %}

@@ -2,9 +2,12 @@
 {% load otree %}
 
 {% block title %}
-    What do you think others will do? (4/5)
+    What do you think others will do? (5/5)
 {% endblock %}
 
+{% block scripts %}
+{% include 'snippets/slider.html' %}
+{% endblock %}
 
 {% block styles %}
     {% include 'snippets/Button_style.html' %}
@@ -20,64 +23,38 @@
 {% block content %}
 
 
+
 <div class="card"><div class="card-body">
-
-    <p> {% include 'snippets/intro-beliefs.html' %}
-        <b>{{ Constants.payoffs_charity_str.3}}</b>. </p>
-    <p>
-        {% if player.role == "Receiver" %}
-            Note that <b>pressing the button had different consequences for different players</b>.
-        {% endif %}
-
-    </p>
-
 <div class="row">
 <div class="col-md-7 col-12">
-
-<table style="width:900px;" class="table table-bordered table-sm">
-  <thead class="thead-light">
-  <tr>
-    <th style="min-width: 200px">Your estimate</th>
-      </tr>
-  </thead>
-
-    <td><div class="form-group col-sm-5" style="margin-bottom:0">
-    <div class="form-group has-error">
-  <div class="form-row align-items-center">
-    <div class="col-auto">
-      <div class="input-group">
-        <input name="belief4" required type="number" min="0"
-               max="100" id="belief4" autocomplete="off"
-                class="form-control" style="padding:0" >
-          <div class="input-group-append"><div class="input-group-text">out of 100 players</div> &nbsp; click the button
-          </div>
-      </div>
-    </div>
-  </div>
-</div>
+    <p> Now, we ask you to think of 100 participants choosing
+        as Player A when they received information about a negative consequence of
+        <b>{{ Constants.payoffs_charity_str.3 }}</b>.</p>
 
 
-        </div></td></tr>
+    <input type="range" name="belief4" min="0" max="100" id="belief4" class="form-control" oninput="updateDescription(this)">
+    <p id="description">Your estimate:</p>
+    <span style="color:red" id="warning"></span>
 
-      </table>
 
     </div>
 <div class="col">
 <div class="alert-secondary">
-<br><br>
+<br>
       <button name="button_test" value="True" class="btn btn--action" disabled><br>
-        <br><p> If you click: <br><br> </p>
+        <br><br><p> If you click: <br><br> </p>
           <h4>You: +&pound;{{ Constants.optionB }}</h4>
           <h4> Red Cross: {{ Constants.payoffs_charity.3.0 }}&pound;{{ Constants.payoffs_charity.3.1 }}0 </h4>
-          <br><br><br><br>
+          <br><br>
 
         </button><br><br></div>
 </div>
 </div>
 </div>
-</div></div>
-
+</div>
+    </div>
     <br>
 
-{% next_button %}
+<button class="btn btn-primary" hidden id="submit">Next</button>
+<div class="btn btn-primary" onclick="checkMovedSlider()">Next</div>
 {% endblock %}

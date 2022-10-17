@@ -211,6 +211,26 @@ class WaitForFinalChoice(WaitPage):
                and not self.player.participant.vars["too_long"]
 
 
+class Sliders(Page):
+    form_model = 'player'
+
+    def get_form_fields(self):
+        form_fields = ['belief_push0', 'belief_push1', 'belief_push2', 'belief_push3', 'belief_push4']
+        if self.session.vars["treatment"] == "Request + Punishment":
+            for i in range(0, 5):
+                form_fields.append("belief_pun" + str(i))
+        return form_fields
+
+    def is_displayed(self):
+        return self.player.role == Constants.sender_role and not self.player.participant.vars["too_long"]
+
+    def vars_for_template(self):
+        vars_for_this_template = dict()
+        if self.session.vars["treatment"] != "Baseline":
+            vars_for_this_template.update({'request': self.session.vars["request"]})
+        return vars_for_this_template
+
+
 class SummaryTask2(Page):
     form_model = 'player'
 
@@ -420,29 +440,30 @@ page_sequence = [
     InstructionsTask2,
     TestButton,
     TestButtonClicked,
+    FinalQuestions2aS,
     InstructionsSender,
     FinalQuestions2S,
     FinalQuestions2bS,
     FinalQuestions2cS,
     FinalQuestions2dS,
-    FinalQuestions2aS,
     BeforeRequest,
     Task2Check,
     Request,
     WaitForRequest,
     SelectMessage,
     WaitForMessage,
+    Sliders,
     ReadyForButton,
     Button,
     ButtonClicked,
     FinalChoice,
     WaitForFinalChoice,
     SummaryTask2,
+    FinalQuestions2aR,
     FinalQuestions2R,
     FinalQuestions2bR,
     FinalQuestions2cR,
     FinalQuestions2dR,
-    FinalQuestions2aR,
     FinalQuestions,
     Payment,
     PaymentSelected,

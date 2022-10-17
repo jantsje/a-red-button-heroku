@@ -1,0 +1,33 @@
+<script>
+    let description = document.getElementById('description');
+    let SliderTouched = false;
+
+    function updateDescription(input) {
+        let click = parseInt(input.value);
+        let nonclick = 100 - click;
+        let warning = document.getElementById('warning');
+        SliderTouched = true;
+        description.innerText = `Your estimate: ${click} participants will click and ${nonclick} will not.`
+        if(SliderTouched){
+            warning.innerText = ''
+        }
+    }
+
+    function checkMovedSlider(){
+        let submitButton = document.getElementById("submit")
+        let warning = document.getElementById('warning');
+        if(!SliderTouched){
+            warning.innerText = 'Please move the slider.'
+        }
+        else{
+            warning.innerText = ''
+            submitButton.click()
+        }
+    }
+
+  $( ".form" ).submit(function( event ) {
+    if (!SliderTouched){
+    event.preventDefault();}
+  });
+
+</script>

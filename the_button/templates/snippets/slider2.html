@@ -1,0 +1,85 @@
+<script>
+    let description = document.getElementById('description');
+    let SlidersTouched = 0;
+    let Slider1Touched = 0;
+    let Slider2Touched = 0;
+    let Slider3Touched = 0;
+    let Slider4Touched = 0;
+    let Slider5Touched = 0;
+    let Slider6Touched = 0;
+    let Slider7Touched = 0;
+    let Slider8Touched = 0;
+    let Slider9Touched = 0;
+    let Slider10Touched = 0;
+
+    function updateSlider1(input) {
+        let warning = document.getElementById('warning');
+        Slider1Touched = 1;
+        warning.innerText = ''
+    }
+    function updateSlider2(input) {
+        let warning = document.getElementById('warning');
+        Slider2Touched = 1;
+        warning.innerText = ''
+    }
+    function updateSlider3(input) {
+        let warning = document.getElementById('warning');
+        Slider3Touched = 1;
+        warning.innerText = ''
+    }
+    function updateSlider4(input) {
+        let warning = document.getElementById('warning');
+        Slider4Touched = 1;
+        warning.innerText = ''
+    }
+    function updateSlider5(input) {
+        let warning = document.getElementById('warning');
+        Slider5Touched = 1;
+        warning.innerText = ''
+    }
+    function updateSlider6(input) {
+    let warning = document.getElementById('warning');
+    Slider6Touched = 1;
+    warning.innerText = ''
+    }
+    function updateSlider7(input) {
+        let warning = document.getElementById('warning');
+        Slider7Touched = 1;
+        warning.innerText = ''
+    }
+    function updateSlider8(input) {
+        let warning = document.getElementById('warning');
+        Slider8Touched = 1;
+        warning.innerText = ''
+    }
+    function updateSlider9(input) {
+        let warning = document.getElementById('warning');
+        Slider9Touched = 1;
+        warning.innerText = ''
+    }
+    function updateSlider10(input) {
+        let warning = document.getElementById('warning');
+        Slider10Touched = 1;
+        warning.innerText = ''
+    }
+
+    function checkMovedSlider(){
+        let submitButton = document.getElementById("submit")
+        let warning = document.getElementById('warning');
+        let SlidersTouched = Slider1Touched + Slider2Touched + Slider3Touched + Slider4Touched + Slider5Touched +
+            Slider6Touched + Slider7Touched + Slider8Touched + Slider9Touched + Slider10Touched
+        if(SlidersTouched < 10){
+            warning.innerText = 'Please move the sliders.'
+        }
+        else{
+            warning.innerText = ''
+            submitButton.click()
+        }
+    }
+
+  $( ".form" ).submit(function( event ) {
+    if (SlidersTouched < 10){
+    event.preventDefault();}
+  });
+
+</script>

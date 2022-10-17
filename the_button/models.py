@@ -1,13 +1,4 @@
-from otree.api import (
-    models,
-    widgets,
-    BaseConstants,
-    BaseSubsession,
-    BaseGroup,
-    BasePlayer,
-    Currency as c,
-    currency_range,
-)
+from otree.api import *
 import random
 from django import forms
 
@@ -196,6 +187,17 @@ class Player(BasePlayer):
     belief2 = models.PositiveIntegerField()   # -1.0
     belief3 = models.PositiveIntegerField()   # -0.5
     belief4 = models.PositiveIntegerField()   # +0.5
+
+    belief_push0 = models.PositiveIntegerField()
+    belief_push1 = models.PositiveIntegerField()
+    belief_push2 = models.PositiveIntegerField()
+    belief_push3 = models.PositiveIntegerField()
+    belief_push4 = models.PositiveIntegerField()
+    belief_pun0 = models.PositiveIntegerField()
+    belief_pun1 = models.PositiveIntegerField()
+    belief_pun2 = models.PositiveIntegerField()
+    belief_pun3 = models.PositiveIntegerField()
+    belief_pun4 = models.PositiveIntegerField()
 
     def store_uq_button(self):
         self.uq_wrong_button = self.understanding_questions_wrong_attempts

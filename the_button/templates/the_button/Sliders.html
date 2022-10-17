@@ -1,0 +1,111 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    What do you think Player A will do?
+{% endblock %}
+
+{% block scripts %}
+
+{% include 'snippets/slider2.html' %}
+{% if treatment != "Request + Punishment" %}
+<script>
+    Slider2Touched = 1;
+    Slider4Touched = 1;
+    Slider6Touched = 1;
+    Slider8Touched = 1;
+    Slider10Touched = 1;
+</script>
+{% endif %}
+{% endblock %}
+
+{% block styles %}
+<style>
+
+.flex{display:flex}
+
+.table td {
+  vertical-align: middle;
+}
+
+</style>
+    {% endblock %}
+
+{% block content %}
+
+
+<div class="card"><div class="card-body">
+    <p> We now ask your predictions about the behavior of your matched partner (Player A ).
+        Please position the sliders below to match your perceived chance that
+        {% if treatment == "Request + Punishment" %} the two actions in the columns below will happen.
+        {% else %} Player A will push the button, for each of the following situations.
+        {% endif %}
+        </p><p>You can position the sliders from
+        0 (will not happen for sure) to 100 (will happen for sure).</p>
+{% if treatment != "Baseline" %}
+    <p> Note that Player A sent you the following request:
+        <b>Please {% if request == "request_no_info" %} do not {% endif %} replace ??? by the actual consequences for the Red Cross.</b></p>
+{% endif %}
+<div class="row">
+    <table class="table table-bordered table-hover table-sm">
+
+  <thead class="thead-light">
+  <tr>
+    <th></th>
+    <th>Player A will push the button...</th>
+    {% if treatment == "Request + Punishment" %}<th>Player A will reduce my payoff...</th>{% endif %}
+  </tr>
+  </thead>
+  <tr>
+      <td>... when uninformed, so Red Cross: <b>???</b></td>
+    <td><div class="flex">0&nbsp;<input type="range" name="belief_push0" min="0" max="100" id="belief_push0" class="form-control" oninput="updateSlider1(this)">&nbsp;100</div></td>
+      {% if treatment == "Request + Punishment" %}<td><div class="flex">0&nbsp;<input type="range" name="belief_pun0" min="0" max="100" id="belief_pun0" class="form-control" oninput="updateSlider2(this)">&nbsp;100</div></td>{% endif %}
+  </tr>
+          <tr>
+    <td>... when informed that Red Cross: <b>{{ Constants.payoffs_charity_str.0 }}</b></td>
+              <td><div class="flex">0&nbsp;<input type="range" name="belief_push1" min="0" max="100" id="belief_push1" class="form-control" oninput="updateSlider3(this)">&nbsp;100</div></td>
+        {% if treatment == "Request + Punishment" %}      <td><div class="flex">0&nbsp;<input type="range" name="belief_pun1" min="0" max="100" id="belief_pun1" class="form-control" oninput="updateSlider4(this)">&nbsp;100</div></td>{% endif %}
+  </tr>
+          <tr>
+    <td>... when informed that Red Cross: <b>{{ Constants.payoffs_charity_str.1 }}</b></td>
+              <td><div class="flex">0&nbsp;<input type="range" name="belief_push2" min="0" max="100" id="belief_push2" class="form-control" oninput="updateSlider5(this)">&nbsp;100</div></td>
+        {% if treatment == "Request + Punishment" %}      <td><div class="flex">0&nbsp;<input type="range" name="belief_pun2" min="0" max="100" id="belief_pun2" class="form-control" oninput="updateSlider6(this)">&nbsp;100</div></td>{% endif %}
+  </tr>
+          <tr>
+    <td>... when informed that Red Cross: <b>{{ Constants.payoffs_charity_str.2 }}</b></td>
+              <td><div class="flex">0&nbsp;<input type="range" name="belief_push3" min="0" max="100" id="belief_push3" class="form-control"oninput="updateSlider7(this)">&nbsp;100</div></td>
+         {% if treatment == "Request + Punishment" %}     <td><div class="flex">0&nbsp;<input type="range" name="belief_pun3" min="0" max="100" id="belief_pun3" class="form-control" oninput="updateSlider8(this)">&nbsp;100</div></td>{% endif %}
+  </tr>
+          <tr>
+    <td>... when informed that Red Cross: <b>{{ Constants.payoffs_charity_str.3 }}</b></td>
+              <td><div class="flex">0&nbsp;<input type="range" name="belief_push4" min="0" max="100" id="belief_push4" class="form-control" oninput="updateSlider9(this)">&nbsp;100</div></td>
+          {% if treatment == "Request + Punishment" %}    <td><div class="flex">0&nbsp;<input type="range" name="belief_pun4" min="0" max="100" id="belief_pun4" class="form-control" oninput="updateSlider10(this)">&nbsp;100</div></td>{% endif %}
+  </tr>
+</table>
+
+
+    <span style="color:red" id="warning"></span>
+
+
+
+
+<div class="col">
+
+</div>
+<div class="col">
+
+
+
+
+    </div>
+<div class="col">
+</div>
+</div>
+</div>
+</div>
+    </div>
+    <br>
+
+<button class="btn btn-primary" hidden id="submit">Next</button>
+<div class="btn btn-primary" onclick="checkMovedSlider()">Next</div>
+{% endblock %}
