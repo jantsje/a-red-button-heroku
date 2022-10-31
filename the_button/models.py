@@ -157,7 +157,7 @@ class Player(BasePlayer):
     gender = models.IntegerField(choices=[(0, 'Male'), (1, 'Female'),
                                           (2, 'Non-binary'), (3, 'Rather not say')],
                                  label="What is your gender?",
-                                 widget=widgets.RadioSelect,
+                                 widget=widgets.RadioSelectHorizontal,
                                  )
     feedback = models.LongStringField(widget=forms.Textarea(attrs={'rows': 5, 'cols': 130}),
                                       label="This is the end of the survey. "
@@ -198,6 +198,14 @@ class Player(BasePlayer):
     belief_pun2 = models.PositiveIntegerField()
     belief_pun3 = models.PositiveIntegerField()
     belief_pun4 = models.PositiveIntegerField()
+
+    identify_charity = models.IntegerField()
+    income = models.IntegerField(choices=[(0, '£999 or less'), (1, '£1,000 - £1,999'),
+                                          (2, '£2,000 - £2,999'), (3, '£3,000 - £3,999'),
+                                          (4, '£4,000 or more'), (99, 'Rather not say')],
+                                 label="What is your household monthly income (after taxes)?",
+                                 widget=widgets.RadioSelectHorizontal,
+                                 )
 
     def store_uq_button(self):
         self.uq_wrong_button = self.understanding_questions_wrong_attempts

@@ -1,6 +1,58 @@
 {% extends "global/Page.html" %}
 {% load otree %}
 
+{% block styles %}
+
+    <style>
+
+    .parent {white-space:nowrap;
+}
+    .child {display:inline-block;
+    vertical-align: middle;
+
+    }
+
+    </style>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+    let description = document.getElementById('description');
+    let SliderTouched = false;
+
+    function updateDescription(input) {
+        let click = parseInt(input.value);
+        let nonclick = 5 - click;
+        let warning = document.getElementById('warning');
+        SliderTouched = true;
+        description.innerText = `Current slider position: ${click}`
+        if(SliderTouched){
+            warning.innerText = ''
+        }
+    }
+
+    function checkMovedSlider(){
+        let submitButton = document.getElementById("submit")
+        let warning = document.getElementById('warning');
+        if(!SliderTouched){
+            warning.innerText = 'Please move the slider.'
+        }
+        else{
+            warning.innerText = ''
+            submitButton.click()
+        }
+    }
+
+  $( ".form" ).submit(function( event ) {
+    if (!SliderTouched){
+    event.preventDefault();}
+  });
+
+</script>
+{% endblock %}
+
 {% block title %}
     Final Questionnaire
 {% endblock %}
@@ -13,8 +65,8 @@
 
         {% for field in form %}
         {% if field.name == "gender" %}
-            <b>{{ field.label }}</b><br>
-            {{ field }}
+            <b>{{ field.label }}</b>
+            {{ field }} <br><br>
         {% elif field.name == "age" %}
             <b>{{ field.label }}</b>
             <div class="input-group col-xs-1">
@@ -23,6 +75,9 @@
                    min=18 max=120 autocomplete="off" required></div>
             <span class="input-group-text" id = "help-age" class="text-muted"> {{field.help_text}}   </span>
             </div>
+        {% elif field.name == "income" %}
+            <br><b>{{ field.label }}</b>
+            <br>{{ field }} <br><br>
         {% elif field.name == "request_motivation" %} <br>
             <b>Can you explain why you requested information about the consequences for the Red Cross?</b>
             {{ field }}
@@ -58,6 +113,14 @@
             <label><b>{{ field.label }}</b></label><br>
             <textarea class="form-control" name="feedback_pilot" autocomplete="off"></textarea>
 
+        {% elif field.name == "identify_charity" %}
+            <label><b>How much do you identify with the charity Red Cross?</b>
+            (on a scale from -5 = not at all identify, to 5 = very much identify)</label>
+            <div class = "parent">
+            <div class="child">-5 </div> <input type="range" name="identify_charity" min="-5" max="5" id="identify_charity" class="form-control child" oninput="updateDescription(this)">
+            <div class="child">+5 </div></div>
+            <span style="color:red" id="warning"></span>
+            <p id="description">Current slider position:</p>
         {% endif %}
 
 
@@ -66,5 +129,6 @@
 </div></div>
     <br><br>
 
-{% next_button %}
+<button class="btn btn-primary" hidden id="submit">Next</button>
+<div class="btn btn-primary" onclick="checkMovedSlider()">Next</div>
 {% endblock %}

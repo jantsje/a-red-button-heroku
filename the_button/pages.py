@@ -262,7 +262,7 @@ class FinalQuestions(Page):
     def get_form_fields(self):
         messages = [self.player.message_1, self.player.message_2, self.player.message_3, self.player.message_4]
         messages_num = messages.count("True")
-        form_fields = ['gender', 'age']
+        form_fields = ['gender', 'age', 'income', 'identify_charity']
         if not self.player.participant.vars["too_long"]:
             if self.player.role == "Sender" and messages_num > 0:
                 form_fields.append('send_motivation1')
@@ -386,6 +386,8 @@ class Payment(Page):
     form_model = 'player'
 
     def vars_for_template(self):
+        if self.player.participant.vars["too_long"]:
+            self.participant.vars["message"] = ""
         return dict(
             payoff1_self=self.player.participant.vars["payoff1_self"],  # get from previous app (Dana task)
             payoff1_charity=self.player.participant.vars["payoff1_charity"],
